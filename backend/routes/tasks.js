@@ -125,4 +125,25 @@ router.get("/sessions", async (req, res) => {
   }
 });
 
+//added pomodoro counter route
+router.put('/:id', async (req, res) => {
+  try {
+    const updated = await Task.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true, runValidators: true } 
+    );
+
+    if (!updated) {
+      return res.status(404).json({ 
+        message: 'Not found' 
+      });
+    }
+    res.json(updated);
+
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
 module.exports = router;
