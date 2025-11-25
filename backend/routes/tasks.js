@@ -12,15 +12,15 @@ router.get("/", (req, res) => {
     message: "FocusTools API",
     status: "Running",
     endpoints: {
-      tasks: "/api/tasks",
-      sessions: "/api/sessions",
+      tasks: "/tasks",
+      sessions: "/sessions",
     },
   });
 });
 
 // TODO: Add your Task routes here
-// POST /api/tasks
-router.post("/api/tasks", async (req, res) => {
+// POST /tasks
+router.post("/tasks", async (req, res) => {
   try {
     
     const newTask = new Task(req.body);
@@ -33,8 +33,8 @@ router.post("/api/tasks", async (req, res) => {
   }
 });
 
-// GET /api/tasks
-router.get("/api/tasks", async (req, res) => {
+// GET /tasks
+router.get("/tasks", async (req, res) => {
    try {
     const tasks = await Task.find();
     res.json(tasks);
@@ -43,8 +43,8 @@ router.get("/api/tasks", async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
-// GET /api/tasks/:id
-router.get("/api/tasks/:id", async (req, res) => {
+// GET /tasks/:id
+router.get("/tasks/:id", async (req, res) => {
   try {
     const task = await Task.findById(req.params.id);
 
@@ -58,8 +58,8 @@ router.get("/api/tasks/:id", async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
-// PUT /api/tasks/:id
-router.put("/api/tasks/:id", async (req, res) => {
+// PUT /tasks/:id
+router.put("/tasks/:id", async (req, res) => {
   try {
     const updatedTask = await Task.findByIdAndUpdate(
       req.params.id,
@@ -81,8 +81,8 @@ router.put("/api/tasks/:id", async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 });
-// DELETE /api/tasks/:id
-router.delete("/api/tasks/:id", async (req, res) => {
+// DELETE /tasks/:id
+router.delete("/tasks/:id", async (req, res) => {
   try {
     const deletedTask = await Task.findByIdAndDelete(req.params.id);
 
@@ -101,8 +101,8 @@ router.delete("/api/tasks/:id", async (req, res) => {
   }
 });
 // TODO: Add your Session routes here
-// POST /api/
-router.post("/api/sessions", async (req, res) => {
+// POST /
+router.post("/sessions", async (req, res) => {
   try {
     
     const newSession= new Session(req.body);
@@ -114,8 +114,8 @@ router.post("/api/sessions", async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 });
-// GET /api/sessions
-router.get("/api/sessions", async (req, res) => {
+// GET /sessions
+router.get("/sessions", async (req, res) => {
    try {
     const sessions = await Session.find().populate('taskId');
     res.json(sessions);
